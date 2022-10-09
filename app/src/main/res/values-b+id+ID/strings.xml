@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">My Movies</string>
+    <string name="text_search">Cari</string>
+    <string name="text_empty">Item ini Kosong</string>
+    <string name="text_title_movie">Judul Film</string>
+    <string name="text_description_movie">Deskripsi Film</string>
+    <string name="text_poster_movie">Poster Film</string>
+    <string name="text_home">Beranda</string>
+    <string name="text_coming_soon">Akan Tayang</string>
+    <string name="text_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus tempor magna vel pharetra. Aliquam eget ultricies nisl. Ut mattis turpis lacus, eu euismod enim ultrices sed. Suspendisse leo justo, semper at viverra vel, vestibulum ut tortor. Integer vestibulum leo accumsan turpis consectetur, sed vehicula tellus tempus. Donec vitae est convallis, posuere nulla ut, ultricies elit. Nullam varius tempor leo eu ullamcorper. Cras tellus tellus, malesuada efficitur imperdiet molestie, condimentum nec felis.</string>
+    <string name="text_rating">Rating</string>
+    <string name="text_name_user">Nama User</string>
+    <string name="text_discover">Temukan</string>
+    <string name="text_great_movies">Film Terbaik</string>
+    <string name="text_now_playing">Tayang Sekarang</string>
+    <string name="text_popular">Populer</string>
+    <string name="text_up_coming">Segera Tayang</string>
+    <string name="text_top_rated">Rating Terbaik</string>
+    <string name="text_similar">Film yang Serupa</string>
+    <string name="text_backdrop_movie">Backdrop Film</string>
+    <string name="text_account">Profil</string>
+    <string name="text_login">Login</string>
+    <string name="text_username">Username</string>
+    <string name="text_password">Password</string>
+    <string name="text_dont_have_account">Belum Punya Akun? Klik Disini</string>
+    <string name="text_name">Nama Lengkap</string>
+    <string name="text_email">Alamat Email</string>
+    <string name="text_register">Daftar</string>
+    <string name="error_text_login_not_correct">Username dan Password tidak Benar</string>
+    <string name="error_text_empty_username">Username Kosong</string>
+    <string name="error_text_empty_password">Password Kosong</string>
+    <string name="error_text_empty_confirm_password">Konfirmasi Password Kosong</string>
+    <string name="error_text_empty_name">Nama Lengkap Kosong</string>
+    <string name="text_confirm_password">Konfirmasi Password</string>
+    <string name="error_text_password_not_match">Password tidak Sama</string>
+    <string name="error_text_username_already">Username sudah Digunakan</string>
+    <string name="text_keep_it">Jaga Agar Selalu Terbaru</string>
+    <string name="text_edit_profile">Edit Profil</string>
+    <string name="text_change_password">Ganti Password</string>
+    <string name="text_logout">Logout</string>
+    <string name="text_profile">Profil</string>
+    <string name="text_cancel">Batal</string>
+    <string name="text_save">Simpan</string>
+    <string name="text_new_password">Password Baru</string>
+    <string name="text_confirm_new_password">Konfirmasi Password Baru</string>
+
+
+</resources>
