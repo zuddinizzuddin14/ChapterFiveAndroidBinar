@@ -39,7 +39,7 @@ class ProfileActivity : AppCompatActivity() {
         }
         binding.llLogout.setOnClickListener {
             viewModel.logout()
-            startActivity(Intent(this@ProfileActivity, MovieListActivity::class.java))
+            onDestroy()
         }
         binding.ivBack.setOnClickListener {
             onBackPressed()
