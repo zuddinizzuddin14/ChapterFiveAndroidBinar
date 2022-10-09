@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">My Movies</string>
+    <string name="text_search">Search</string>
+    <string name="text_empty">Item is Empty</string>
+    <string name="text_title_movie">Title Movie</string>
+    <string name="text_description_movie">Description Movie</string>
+    <string name="text_poster_movie">Poster Movie</string>
+    <string name="text_home">Home</string>
+    <string name="text_coming_soon">Coming Soon</string>
+    <string name="text_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus cursus tempor magna vel pharetra. Aliquam eget ultricies nisl. Ut mattis turpis lacus, eu euismod enim ultrices sed. Suspendisse leo justo, semper at viverra vel, vestibulum ut tortor. Integer vestibulum leo accumsan turpis consectetur, sed vehicula tellus tempus. Donec vitae est convallis, posuere nulla ut, ultricies elit. Nullam varius tempor leo eu ullamcorper. Cras tellus tellus, malesuada efficitur imperdiet molestie, condimentum nec felis.</string>
+    <string name="text_rating">Rating</string>
+    <string name="text_name_user">Name User</string>
+    <string name="text_discover">Discover</string>
+    <string name="text_great_movies">Great Movies</string>
+    <string name="text_now_playing">Now Playing</string>
+    <string name="text_popular">Popular</string>
+    <string name="text_up_coming">Up Coming</string>
+    <string name="text_top_rated">Top Rated</string>
+    <string name="text_similar">Similar Movies</string>
+    <string name="text_backdrop_movie">Backdrop Movie</string>
+    <string name="text_account">Profile</string>
+    <string name="text_login">Login</string>
+    <string name="text_username">Username</string>
+    <string name="text_password">Password</string>
+    <string name="text_dont_have_account">Dont Have Account? Click Here</string>
+    <string name="text_name">Full Name</string>
+    <string name="text_email">Email Address</string>
+    <string name="text_register">Register</string>
+    <string name="error_text_login_not_correct">Username and Password is not Correct</string>
+    <string name="error_text_empty_username">Username is Empty</string>
+    <string name="error_text_empty_password">Password is Empty</string>
+    <string name="error_text_empty_confirm_password">Confirm Password is Empty</string>
+    <string name="error_text_empty_name">Full Name is Empty</string>
+    <string name="text_confirm_password">Confirm Password</string>
+    <string name="error_text_password_not_match">Password does not match</string>
+    <string name="error_text_username_already">Username is Already Taken</string>
+    <string name="text_keep_it">Keep it up to date</string>
+    <string name="text_edit_profile">Edit Profile</string>
+    <string name="text_change_password">Change Password</string>
+    <string name="text_logout">Logout</string>
+    <string name="text_profile">Profile</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_save">Save</string>
+    <string name="text_new_password">New Password</string>
+    <string name="text_confirm_new_password">Confirm New Password</string>
+
+
+</resources>
