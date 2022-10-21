@@ -3,33 +3,28 @@ package com.example.mymovieapp.presentation.ui.listmovie
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymovieapp.R
-import com.example.mymovieapp.data.local.database.entity.UserEntity
 import com.example.mymovieapp.data.server.models.MovieModel
 import com.example.mymovieapp.databinding.ActivityMovieListBinding
-import com.example.mymovieapp.di.ServiceLocator
 import com.example.mymovieapp.presentation.ui.ItemClick
 import com.example.mymovieapp.presentation.ui.profileuser.ProfileActivity
 import com.example.mymovieapp.presentation.ui.detailmovie.DetailMovieActivity
 import com.example.mymovieapp.presentation.ui.listmovie.adapter.*
 import com.example.mymovieapp.presentation.ui.loginuser.LoginActivity
 import com.example.mymovieapp.presentation.ui.searchmovie.MovieSearchActivity
-import com.example.mymovieapp.utils.viewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieListActivity : AppCompatActivity() {
 
     private val binding: ActivityMovieListBinding by lazy {
         ActivityMovieListBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: MovieListViewModel by viewModelFactory {
-        MovieListViewModel(
-            ServiceLocator.provideMovieRepository(),
-            ServiceLocator.provideUserRepository(this@MovieListActivity)
-        )
-    }
+    private val viewModel: MovieListViewModel by viewModels()
 
     private val popularAdapter: PopularAdapter by lazy {
         PopularAdapter (object : ItemClick {
@@ -66,6 +61,7 @@ class MovieListActivity : AppCompatActivity() {
         initList()
         observeData()
         setClickListeners()
+        binding.constraintMenu.isVisible = true
     }
 
     private fun observeData() {
@@ -117,8 +113,8 @@ class MovieListActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.userResult.observe(this) {
-            bindDataToView(it.payload)
+        viewModel.nameResult().observe(this) {
+            binding.tvNameUser.text = it.toString()
         }
     }
 
@@ -157,14 +153,7 @@ class MovieListActivity : AppCompatActivity() {
         checkUserlogin()
     }
 
-    private fun bindDataToView(data: UserEntity?) {
-        data?.let {
-            binding.tvNameUser.text = data.name
-        }
-    }
-
     private fun getData() {
-        viewModel.userResult()
         viewModel.popularResult()
         viewModel.nowPlayingResult()
         viewModel.upComingResult()
@@ -173,13 +162,13 @@ class MovieListActivity : AppCompatActivity() {
 
     private fun checkUserlogin() {
         binding.constraintMenu.isVisible = false
-        if (viewModel.getSession().not()) {
-            startActivity(Intent(this@MovieListActivity, LoginActivity::class.java))
-            finish()
-        } else {
-            binding.constraintMenu.isVisible = true
+        viewModel.getSession().observe(this@MovieListActivity) {
+            if (!it) {
+                startActivity(Intent(this@MovieListActivity, LoginActivity::class.java))
+            } else {
+                binding.constraintMenu.isVisible = true
+            }
         }
     }
-
 
 }

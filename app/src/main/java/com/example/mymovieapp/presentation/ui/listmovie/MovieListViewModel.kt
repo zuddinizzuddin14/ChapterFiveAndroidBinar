@@ -1,22 +1,21 @@
 package com.example.mymovieapp.presentation.ui.listmovie
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.mymovieapp.data.local.database.entity.UserEntity
+import androidx.lifecycle.*
 import com.example.mymovieapp.data.repositories.MovieRepository
 import com.example.mymovieapp.data.repositories.UserRepository
 import com.example.mymovieapp.data.server.response.MovieResponse
 import com.example.mymovieapp.wrapper.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MovieListViewModel(
+@HiltViewModel
+class MovieListViewModel @Inject constructor(
     private val movieRepository: MovieRepository,
     private val userRepository: UserRepository
     ): ViewModel() {
 
-    val userResult = MutableLiveData<Resource<UserEntity?>>()
     val popularResult = MutableLiveData<Resource<MovieResponse>>()
     val topRatedResult = MutableLiveData<Resource<MovieResponse>>()
     val upComingResult = MutableLiveData<Resource<MovieResponse>>()
@@ -24,15 +23,12 @@ class MovieListViewModel(
     val loadingState = MutableLiveData<Boolean>()
     val errorState = MutableLiveData<Pair<Boolean, Exception?>>()
 
-    fun getSession(): Boolean {
-        return userRepository.getSession()
+    fun getSession(): LiveData<Boolean> {
+        return userRepository.getSession().asLiveData()
     }
 
-    fun userResult() {
-        val userId = userRepository.getUserId()
-        viewModelScope.launch {
-            userResult.postValue(userRepository.getUserById(userId))
-        }
+    fun nameResult(): LiveData<String> {
+        return userRepository.getName().asLiveData()
     }
 
     fun popularResult() {

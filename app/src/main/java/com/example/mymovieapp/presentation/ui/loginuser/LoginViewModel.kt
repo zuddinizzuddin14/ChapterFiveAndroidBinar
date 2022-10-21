@@ -1,20 +1,32 @@
 package com.example.mymovieapp.presentation.ui.loginuser
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.example.mymovieapp.data.repositories.UserRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel(private val repository: UserRepository): ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val repository: UserRepository
+    ): ViewModel() {
 
-    fun checkIsUserCorrect(username: String, password: String): Boolean {
-        return repository.checkIsUserCorrect(username, password)
+
+    fun getUsername(): LiveData<String> {
+        return repository.getUsername().asLiveData()
     }
 
-    fun getIdUser(username: String, password: String): Int {
-        return repository.getUserId(username, password)
+    fun getPassword(): LiveData<String> {
+        return repository.getPassword().asLiveData()
     }
 
-    fun setUserLogin(newSession: Boolean, newUserId: Int) {
-        return repository.setUserLogin(newSession, newUserId)
+    fun sessionGranted() {
+        viewModelScope.launch {
+            repository.setSession(true)
+        }
     }
 
 }

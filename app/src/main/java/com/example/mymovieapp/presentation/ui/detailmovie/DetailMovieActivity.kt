@@ -4,17 +4,15 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.isVisible
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mymovieapp.R
 import com.example.mymovieapp.data.server.models.MovieModel
 import com.example.mymovieapp.databinding.ActivityDetailMovieBinding
-import com.example.mymovieapp.di.ServiceLocator
 import com.example.mymovieapp.presentation.ui.ItemClick
 import com.example.mymovieapp.presentation.ui.detailmovie.adapter.SimilarAdapter
-import com.example.mymovieapp.utils.viewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DetailMovieActivity : AppCompatActivity() {
 
     private val movie: MovieModel by lazy {
@@ -25,9 +23,7 @@ class DetailMovieActivity : AppCompatActivity() {
         ActivityDetailMovieBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: DetailMovieViewModel by viewModelFactory {
-        DetailMovieViewModel(ServiceLocator.provideMovieRepository())
-    }
+    private val viewModel: DetailMovieViewModel by viewModels()
 
     private val similarAdapter: SimilarAdapter by lazy {
         SimilarAdapter(object : ItemClick {

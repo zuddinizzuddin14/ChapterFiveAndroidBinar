@@ -19,10 +19,12 @@ class NowPlayingAdapter(private val itemClick: ItemClick) :
     fun setItems(items: List<MovieModel>) {
         this.items.clear()
         this.items.addAll(items)
+        notifyDataSetChanged()
     }
 
     fun clearItems() {
         this.items.clear()
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

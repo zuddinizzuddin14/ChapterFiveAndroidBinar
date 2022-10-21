@@ -1,25 +1,24 @@
 package com.example.mymovieapp.presentation.ui.loginuser
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mymovieapp.R
 import com.example.mymovieapp.databinding.ActivityLoginBinding
-import com.example.mymovieapp.di.ServiceLocator
 import com.example.mymovieapp.presentation.ui.listmovie.MovieListActivity
 import com.example.mymovieapp.presentation.ui.registeruser.RegisterActivity
-import com.example.mymovieapp.utils.viewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     private val binding: ActivityLoginBinding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: LoginViewModel by viewModelFactory {
-        LoginViewModel(ServiceLocator.provideUserRepository(this@LoginActivity))
-    }
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +39,19 @@ class LoginActivity : AppCompatActivity() {
         if (validateForm()) {
             val username = binding.etUsername.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
-            val isUserCorrect = viewModel.checkIsUserCorrect(username, password)
-            if(isUserCorrect){
-                val userId = viewModel.getIdUser(username, password)
-                viewModel.setUserLogin(true, userId)
+            var isUsernameCorrect = false
+            var isPasswordCorrect = false
+
+            viewModel.getUsername().observe(this@LoginActivity) {
+                if (username == it) isUsernameCorrect = true
+            }
+
+            viewModel.getPassword().observe(this@LoginActivity) {
+                if (password == it) isPasswordCorrect = true
+            }
+
+            if(isUsernameCorrect && isPasswordCorrect){
+                viewModel.sessionGranted()
                 startActivity(Intent(this@LoginActivity, MovieListActivity::class.java))
             } else{
                 Toast.makeText(this@LoginActivity, getString(R.string.error_text_login_not_correct), Toast.LENGTH_SHORT).show()

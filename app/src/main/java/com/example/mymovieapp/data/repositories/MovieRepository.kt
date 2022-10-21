@@ -1,57 +1,45 @@
 package com.example.mymovieapp.data.repositories
 
-import com.example.mymovieapp.data.server.models.MovieModel
 import com.example.mymovieapp.data.server.response.MovieResponse
-import com.example.mymovieapp.data.server.services.TmdbApiService
+import com.example.mymovieapp.data.server.services.ApiHelper
 import com.example.mymovieapp.wrapper.Resource
 
-interface MovieRepository {
-
-    suspend fun searchMovie(query: String): Resource<MovieResponse>
-    suspend fun getPopularMovies(): Resource<MovieResponse>
-    suspend fun getTopRatedMovies(): Resource<MovieResponse>
-    suspend fun getUpComingMovies(): Resource<MovieResponse>
-    suspend fun getNowPlayingMovies(): Resource<MovieResponse>
-    suspend fun getSimilarMovies(movieId: Int): Resource<MovieResponse>
-
-}
-
-class MovieRepositoryImpl(
-    private val apiService : TmdbApiService
-) : MovieRepository {
-    override suspend fun searchMovie(query: String): Resource<MovieResponse> {
+class MovieRepository(
+    private val apiHelper: ApiHelper
+) {
+   suspend fun searchMovie(query: String): Resource<MovieResponse> {
         return proceed {
-            apiService.searchMovie(query)
+            apiHelper.searchMovie(query)
         }
     }
 
-    override suspend fun getPopularMovies(): Resource<MovieResponse> {
+   suspend fun getPopularMovies(): Resource<MovieResponse> {
         return proceed {
-            apiService.popularMovies()
+            apiHelper.popularMovies()
         }
     }
 
-    override suspend fun getTopRatedMovies(): Resource<MovieResponse> {
+   suspend fun getTopRatedMovies(): Resource<MovieResponse> {
         return proceed {
-            apiService.topRatedMovies()
+            apiHelper.topRatedMovies()
         }
     }
 
-    override suspend fun getUpComingMovies(): Resource<MovieResponse> {
+   suspend fun getUpComingMovies(): Resource<MovieResponse> {
         return proceed {
-            apiService.upComingMovies()
+            apiHelper.upComingMovies()
         }
     }
 
-    override suspend fun getNowPlayingMovies(): Resource<MovieResponse> {
+   suspend fun getNowPlayingMovies(): Resource<MovieResponse> {
         return proceed {
-            apiService.nowPlayingMovies()
+            apiHelper.nowPlayingMovies()
         }
     }
 
-    override suspend fun getSimilarMovies(movieId: Int): Resource<MovieResponse> {
+   suspend fun getSimilarMovies(movieId: Int): Resource<MovieResponse> {
         return proceed {
-            apiService.similarMovies(movieId)
+            apiHelper.similarMovies(movieId)
         }
     }
 

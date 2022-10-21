@@ -10,10 +10,15 @@ import com.example.mymovieapp.data.server.models.MovieModel
 import com.example.mymovieapp.data.server.response.MovieResponse
 import com.example.mymovieapp.databinding.ActivityDetailMovieBinding
 import com.example.mymovieapp.wrapper.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailMovieViewModel(private val repository: MovieRepository): ViewModel() {
+@HiltViewModel
+class DetailMovieViewModel @Inject constructor(
+    private val repository: MovieRepository
+    ): ViewModel() {
 
     val similarResult = MutableLiveData<Resource<MovieResponse>>()
 

@@ -1,25 +1,22 @@
 package com.example.mymovieapp.presentation.ui.profileuser.changepassword
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.view.isVisible
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mymovieapp.R
-import com.example.mymovieapp.data.local.database.entity.UserEntity
 import com.example.mymovieapp.databinding.ActivityChangePasswordBinding
-import com.example.mymovieapp.di.ServiceLocator
 import com.example.mymovieapp.presentation.ui.profileuser.ProfileViewModel
-import com.example.mymovieapp.utils.viewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChangePasswordActivity : AppCompatActivity() {
 
     private val binding: ActivityChangePasswordBinding by lazy {
         ActivityChangePasswordBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: ProfileViewModel by viewModelFactory {
-        ProfileViewModel(ServiceLocator.provideUserRepository(this@ChangePasswordActivity))
-    }
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,15 +99,6 @@ class ChangePasswordActivity : AppCompatActivity() {
         binding.btnCancel.setOnClickListener {
             onBackPressed()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getData()
-    }
-
-    private fun getData() {
-        viewModel.userResult()
     }
 
 }

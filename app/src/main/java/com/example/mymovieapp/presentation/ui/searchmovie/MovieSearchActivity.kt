@@ -4,26 +4,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mymovieapp.R
 import com.example.mymovieapp.data.server.models.MovieModel
 import com.example.mymovieapp.databinding.ActivityMovieSearchBinding
-import com.example.mymovieapp.di.ServiceLocator
 import com.example.mymovieapp.presentation.ui.detailmovie.DetailMovieActivity
 import com.example.mymovieapp.presentation.ui.ItemClick
 import com.example.mymovieapp.presentation.ui.searchmovie.adapter.SearchAdapter
-import com.example.mymovieapp.utils.viewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MovieSearchActivity : AppCompatActivity() {
 
     private val binding: ActivityMovieSearchBinding by lazy {
         ActivityMovieSearchBinding.inflate(layoutInflater)
     }
-    private val viewModel: MovieSearchViewModel by viewModelFactory {
-        MovieSearchViewModel(ServiceLocator.provideMovieRepository())
-    }
+    private val viewModel: MovieSearchViewModel by viewModels()
 
     private val adapter: SearchAdapter by lazy {
         SearchAdapter(object : ItemClick {

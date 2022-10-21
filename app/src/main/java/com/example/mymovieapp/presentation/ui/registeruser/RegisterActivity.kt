@@ -2,22 +2,20 @@ package com.example.mymovieapp.presentation.ui.registeruser
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mymovieapp.R
-import com.example.mymovieapp.data.local.database.entity.UserEntity
 import com.example.mymovieapp.databinding.ActivityRegisterBinding
-import com.example.mymovieapp.di.ServiceLocator
-import com.example.mymovieapp.utils.viewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
 
     private val binding: ActivityRegisterBinding by lazy {
         ActivityRegisterBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: RegisterViewModel by viewModelFactory {
-        RegisterViewModel(ServiceLocator.provideUserRepository(this@RegisterActivity))
-    }
+    private val viewModel: RegisterViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +34,13 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun registerUser() {
         if (validateForm()) {
-            if (validateUsername()) {
-                viewModel.registerUser(parseFormIntoEntity())
-                Toast.makeText(this@RegisterActivity, "Register Success", Toast.LENGTH_SHORT).show()
-                onBackPressed()
-            } else {
-                Toast.makeText(this@RegisterActivity, getString(R.string.error_text_username_already), Toast.LENGTH_SHORT).show()
-            }
+            viewModel.registerUser(
+                binding.etUsername.text.toString().trim(),
+                binding.etPassword.text.toString().trim(),
+                binding.etName.text.toString().trim()
+            )
+            Toast.makeText(this@RegisterActivity, getString(R.string.success_register), Toast.LENGTH_SHORT).show()
+            onBackPressed()
         }
     }
 
@@ -90,18 +88,5 @@ class RegisterActivity : AppCompatActivity() {
         }
         return isFormValid
     }
-
-    private fun validateUsername(): Boolean {
-        return viewModel.checkIsUsernameExist(binding.etUsername.text.toString().trim()).not()
-    }
-
-    private fun parseFormIntoEntity(): UserEntity {
-        return UserEntity(
-            username = binding.etUsername.text.toString().trim(),
-            password = binding.etPassword.text.toString().trim(),
-            name = binding.etName.text.toString().trim()
-        )
-    }
-
 
 }

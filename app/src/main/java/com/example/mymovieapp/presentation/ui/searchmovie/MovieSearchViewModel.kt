@@ -6,10 +6,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.mymovieapp.data.repositories.MovieRepository
 import com.example.mymovieapp.data.server.response.MovieResponse
 import com.example.mymovieapp.wrapper.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MovieSearchViewModel(private val repository: MovieRepository): ViewModel() {
+@HiltViewModel
+class MovieSearchViewModel @Inject constructor(
+    private val repository: MovieRepository
+    ): ViewModel() {
 
     val searchResult = MutableLiveData<Resource<MovieResponse>>()
     val loadingState = MutableLiveData<Boolean>()
