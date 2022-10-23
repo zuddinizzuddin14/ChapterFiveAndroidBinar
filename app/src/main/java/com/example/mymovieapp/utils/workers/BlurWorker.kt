@@ -15,9 +15,6 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.mymovieapp.R
 import com.example.mymovieapp.presentation.ui.profileuser.editprofile.EditProfileActivity
-import com.example.mymovieapp.utils.ImageUtil
-import com.example.mymovieapp.utils.workers.WorkerKeys.IMAGE_INPUT
-import com.example.mymovieapp.utils.workers.WorkerKeys.IMAGE_OUTPUT
 
 class BlurWorker(
     context: Context,
@@ -27,39 +24,11 @@ class BlurWorker(
     override fun doWork(): Result {
         showNotification()
         return try {
-            val image = inputData.getString(IMAGE_INPUT).toString()
-
-            val blurImage = applyBlur(applicationContext, ImageUtil().stringToBitMap(image))
-
-            val builder = Data.Builder()
-            builder.putString(IMAGE_OUTPUT, ImageUtil().bitmapToString(blurImage))
-
-            val outputData = builder.build()
-
-            Result.success(outputData)
+            Result.success()
         } catch (exception: Exception) {
             exception.printStackTrace()
             Result.failure()
         }
-    }
-
-    private fun applyBlur(context: Context, bitmap: Bitmap): Bitmap {
-        val copyBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
-        val outputBitmap = Bitmap.createBitmap(copyBitmap)
-
-        val renderScript = RenderScript.create(context)
-        val scriptIntrinsicBlur = ScriptIntrinsicBlur.create(renderScript, Element.U8_4(renderScript))
-
-        val allocationIn = Allocation.createFromBitmap(renderScript, bitmap)
-        val allocationOut = Allocation.createFromBitmap(renderScript, outputBitmap)
-
-        scriptIntrinsicBlur.setRadius(10F)
-        scriptIntrinsicBlur.setInput(allocationIn)
-        scriptIntrinsicBlur.forEach(allocationOut)
-
-        allocationOut.copyTo(outputBitmap)
-
-        return outputBitmap
     }
 
     private fun showNotification() {

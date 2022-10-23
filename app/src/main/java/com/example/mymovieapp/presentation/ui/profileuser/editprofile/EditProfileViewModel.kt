@@ -5,9 +5,6 @@ import androidx.lifecycle.*
 import androidx.work.*
 import com.example.mymovieapp.data.repositories.UserRepository
 import com.example.mymovieapp.utils.workers.BlurWorker
-import com.example.mymovieapp.utils.workers.SaveWorker
-import com.example.mymovieapp.utils.workers.WorkerKeys
-import com.example.mymovieapp.utils.workers.WorkerKeys.IMAGE_OUTPUT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -37,29 +34,29 @@ class EditProfileViewModel @Inject constructor(
         }
     }
 
-    fun blurImage(context: Context, image: String) {
-
-        val workManager = WorkManager.getInstance(context)
-
-        val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
-        blurBuilder.setInputData(inputBitmap(image))
-
-        var continuation = workManager
-            .beginWith(blurBuilder.build())
-
-        val constraints = Constraints.Builder()
-            .setRequiresCharging(true)
-            .build()
-
-        val save = OneTimeWorkRequestBuilder<SaveWorker>()
-            .setConstraints(constraints)
-            .addTag(IMAGE_OUTPUT)
-            .build()
-
-        continuation = continuation.then(save)
-
-        continuation.enqueue()
-    }
+//    fun blurImage(context: Context, image: String) {
+//
+//        val workManager = WorkManager.getInstance(context)
+//
+//        val blurBuilder = OneTimeWorkRequestBuilder<BlurWorker>()
+//        blurBuilder.setInputData(inputBitmap(image))
+//
+//        var continuation = workManager
+//            .beginWith(blurBuilder.build())
+//
+//        val constraints = Constraints.Builder()
+//            .setRequiresCharging(true)
+//            .build()
+//
+//        val save = OneTimeWorkRequestBuilder<SaveWorker>()
+//            .setConstraints(constraints)
+//            .addTag(IMAGE_OUTPUT)
+//            .build()
+//
+//        continuation = continuation.then(save)
+//
+//        continuation.enqueue()
+//    }
 
     fun blurImage(context: Context) {
         val constraints: Constraints = Constraints.Builder()
@@ -71,11 +68,5 @@ class EditProfileViewModel @Inject constructor(
             .build()
 
         WorkManager.getInstance(context).enqueue(myWorkRequest)
-    }
-
-    private fun inputBitmap(image: String): Data {
-        val builder = Data.Builder()
-        builder.putString(WorkerKeys.IMAGE_INPUT, image)
-        return builder.build()
     }
 }

@@ -72,10 +72,8 @@ class EditProfileActivity : AppCompatActivity() {
                     image = it
                 }
             }
-            image?.let {
-                viewModel.blurImage(this@EditProfileActivity)
-            }
 
+            viewModel.blurImage(this@EditProfileActivity)
             val bitmap = imageUtil.stringToBitMap(image.toString())
             val blurImage = imageUtil.applyBlur(this@EditProfileActivity, bitmap)
             viewModel.saveImage(imageUtil.bitmapToString(blurImage))
