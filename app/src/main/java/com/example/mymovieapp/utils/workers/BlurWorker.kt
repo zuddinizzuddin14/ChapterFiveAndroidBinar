@@ -21,6 +21,11 @@ class BlurWorker(
     workerParameters: WorkerParameters
 ) : Worker(context, workerParameters) {
 
+    companion object {
+        const val CHANNEL_ID = "channel_id"
+        const val NOTIFICATION_ID = 1
+    }
+
     override fun doWork(): Result {
         showNotification()
         return try {
@@ -43,7 +48,8 @@ class BlurWorker(
         )
 
         val notification = NotificationCompat.Builder(
-            applicationContext
+            applicationContext,
+            CHANNEL_ID
         )
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentTitle("WorkRequest Starting")
@@ -53,7 +59,7 @@ class BlurWorker(
             .setContentIntent(pendingIntent)
 
         with(NotificationManagerCompat.from(applicationContext)) {
-            notify(1, notification.build())
+            notify(NOTIFICATION_ID, notification.build())
         }
 
     }
