@@ -34,6 +34,12 @@ class UserDataStore @Inject constructor(
         }
     }
 
+    override suspend fun setImage(name: String) {
+        context.userDataStore.edit { preferences ->
+            preferences[IMAGE_KEY] = name
+        }
+    }
+
     override suspend fun setSession(session: Boolean) {
         context.userDataStore.edit { preferences ->
             preferences[SESSION_KEY] = session
@@ -55,7 +61,14 @@ class UserDataStore @Inject constructor(
     override fun getName(): Flow<String> {
         return context.userDataStore.data.map { preferences ->
             preferences[NAME_KEY] ?: "null"
-        }    }
+        }
+    }
+
+    override fun getImage(): Flow<String> {
+        return context.userDataStore.data.map { preferences ->
+            preferences[IMAGE_KEY] ?: "null"
+        }
+    }
 
     override fun getSession(): Flow<Boolean> {
         return context.userDataStore.data.map { preferences ->
@@ -70,6 +83,7 @@ class UserDataStore @Inject constructor(
         private val USERNAME_KEY = stringPreferencesKey("username_key")
         private val PASSWORD_KEY = stringPreferencesKey("password_key")
         private val NAME_KEY = stringPreferencesKey("name_key")
+        private val IMAGE_KEY = stringPreferencesKey("image_key")
 
         private val Context.userDataStore by preferencesDataStore(
             name = DATASTORE_NAME

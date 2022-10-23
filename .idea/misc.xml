@@ -20,6 +20,7 @@
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_detail.xml" value="0.25416666666666665" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_detail_movie.xml" value="0.33" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_detail_movie2.xml" value="0.36666666666666664" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_edit_profile.xml" value="0.33" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_home_page.xml" value="0.36666666666666664" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_main.xml" value="0.4" />
@@ -44,6 +45,7 @@
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/menu/main_menu.xml" value="0.33" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/menu/search_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/xml/file_paths.xml" value="0.365625" />
       </map>
     </option>
   </component>

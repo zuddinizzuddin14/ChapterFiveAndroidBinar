@@ -71,28 +71,22 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 
     //viewmodel ktx
+    implementation 'androidx.activity:activity-ktx:1.5.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+
+    //live data ktx
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
 
     //coil image loader
     implementation 'io.coil-kt:coil:2.2.1'
 
-    //
-    implementation 'androidx.activity:activity-ktx:1.5.1'
-
-    //encryption Database
-    implementation "net.zetetic:android-database-sqlcipher:4.4.0"
-    implementation "androidx.sqlite:sqlite-ktx:2.2.0"
-
-    //room components
-    implementation "androidx.room:room-ktx:2.4.3"
-    kapt "androidx.room:room-compiler:2.4.3"
-
-    //hilt
+    //hilt dagger
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
 
-
+    //datastore
     implementation "androidx.datastore:datastore-preferences:1.0.0"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+
+    implementation "androidx.work:work-runtime-ktx:2.7.1"
+
 }

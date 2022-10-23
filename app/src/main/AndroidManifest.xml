@@ -4,6 +4,9 @@
     package="com.example.mymovieapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.webkit.PermissionRequest" />
 
     <application
         android:name=".App"
@@ -17,7 +20,10 @@
         android:theme="@style/Theme.MyMovieApp.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.ui.profileuser.changepassword.ChangePasswordActivity"
+            android:name=".presentation.ui.profileuser.editprofile.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.profileuser.subprofile.ChangePasswordActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.registeruser.RegisterActivity"
@@ -44,6 +50,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:authorities="${applicationId}.provider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
     </application>
 
 </manifest>

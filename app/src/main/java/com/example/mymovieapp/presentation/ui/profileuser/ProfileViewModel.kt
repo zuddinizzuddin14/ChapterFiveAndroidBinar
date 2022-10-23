@@ -19,6 +19,10 @@ class ProfileViewModel @Inject constructor(
         return repository.getName().asLiveData()
     }
 
+    fun imageResult(): LiveData<String> {
+        return repository.getImage().asLiveData()
+    }
+
     fun sessionDestroy() {
         viewModelScope.launch {
             repository.setSession(false)

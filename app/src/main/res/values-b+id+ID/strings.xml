@@ -44,6 +44,10 @@
     <string name="text_new_password">Password Baru</string>
     <string name="text_confirm_new_password">Konfirmasi Password Baru</string>
     <string name="success_register">Registrasi Sukses</string>
-
+    <string name="success_change_password">Password Berhasil Dirubah</string>
+    <string name="success_change_name">Nama Berhasil Dirubah</string>
+    <string name="error_text_password_not_correct">Password tidak Benar</string>
+    <string name="text_blur_image">Blur Gambar</string>
+    <string name="text_see_file">Lihat Gambar</string>
 
 </resources>

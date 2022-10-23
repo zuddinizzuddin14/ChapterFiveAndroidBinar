@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.example.mymovieapp.R
 import com.example.mymovieapp.data.server.models.MovieModel
 import com.example.mymovieapp.databinding.ActivityMovieListBinding
@@ -15,6 +17,7 @@ import com.example.mymovieapp.presentation.ui.detailmovie.DetailMovieActivity
 import com.example.mymovieapp.presentation.ui.listmovie.adapter.*
 import com.example.mymovieapp.presentation.ui.loginuser.LoginActivity
 import com.example.mymovieapp.presentation.ui.searchmovie.MovieSearchActivity
+import com.example.mymovieapp.utils.ImageUtil
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -55,13 +58,14 @@ class MovieListActivity : AppCompatActivity() {
         })
     }
 
+    private val convert = ImageUtil()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initList()
         observeData()
         setClickListeners()
-        binding.constraintMenu.isVisible = true
     }
 
     private fun observeData() {
@@ -112,9 +116,15 @@ class MovieListActivity : AppCompatActivity() {
                 topRatedAdapter.setItems(it.payload.results)
             }
         }
-
         viewModel.nameResult().observe(this) {
             binding.tvNameUser.text = it.toString()
+        }
+        viewModel.imageResult().observe(this) {
+            if (!it.equals("null")) {
+                binding.ivAccount.load(convert.stringToBitMap(it)) {
+                    transformations(CircleCropTransformation())
+                }
+            }
         }
     }
 

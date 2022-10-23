@@ -1,4 +1,4 @@
-package com.example.mymovieapp.presentation.ui.profileuser.changepassword
+package com.example.mymovieapp.presentation.ui.profileuser.subprofile
 
 import android.os.Bundle
 import android.widget.Toast
@@ -6,7 +6,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mymovieapp.R
 import com.example.mymovieapp.databinding.ActivityChangePasswordBinding
-import com.example.mymovieapp.presentation.ui.profileuser.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,27 +15,31 @@ class ChangePasswordActivity : AppCompatActivity() {
         ActivityChangePasswordBinding.inflate(layoutInflater)
     }
 
-    private val viewModel: ProfileViewModel by viewModels()
+    private val viewModel: ChangePasswordViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        obServeData()
         setClickListeners()
-    }
-
-    private fun obServeData() {
-
-//        viewModel.changePasswordResult.observe(this) {
-//            changePassword(it.payload)
-//        }
     }
 
     private fun changePassword() {
         if (validateForm()) {
-//            viewModel.registerUser(parseFormIntoEntity())
-//            Toast.makeText(this@RegisterActivity, "Register Success", Toast.LENGTH_SHORT).show()
-//            onBackPressed()
+            val password = binding.etPassword.text.toString().trim()
+            val newPassword = binding.etNewPassword.text.toString().trim()
+            var isPasswordCorrect = false
+
+            viewModel.getPassword().observe(this@ChangePasswordActivity) {
+                if (password == it) isPasswordCorrect = true
+            }
+
+            if(isPasswordCorrect){
+                viewModel.changePassword(newPassword)
+                Toast.makeText(this@ChangePasswordActivity, getString(R.string.success_change_password), Toast.LENGTH_SHORT).show()
+                onBackPressed()
+            } else {
+                Toast.makeText(this@ChangePasswordActivity, getString(R.string.error_text_password_not_correct), Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -48,7 +51,7 @@ class ChangePasswordActivity : AppCompatActivity() {
         if (password.isEmpty()) {
             isFormValid = false
             binding.tilPassword.isErrorEnabled = true
-            binding.tilPassword.error = getString(R.string.error_text_empty_username)
+            binding.tilPassword.error = getString(R.string.error_text_empty_confirm_password)
         } else {
             binding.tilPassword.isErrorEnabled = false
         }
@@ -77,24 +80,9 @@ class ChangePasswordActivity : AppCompatActivity() {
         return isFormValid
     }
 
-//    private fun parseFormIntoEntity(): UserEntity {
-//        return UserEntity(
-//            id = ,
-//            username = ,
-//            password = binding.etPassword.text.toString().trim(),
-//            name = binding.etName.text.toString().trim()
-//        ).apply {
-//            if (isEditAction()) {
-//                noteId?.let {
-//                    id = it
-//                }
-//            }
-//        }
-//    }
-
     private fun setClickListeners() {
         binding.btnSave.setOnClickListener {
-
+            changePassword()
         }
         binding.btnCancel.setOnClickListener {
             onBackPressed()

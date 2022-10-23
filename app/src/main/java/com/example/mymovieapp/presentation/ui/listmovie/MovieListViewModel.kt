@@ -31,6 +31,10 @@ class MovieListViewModel @Inject constructor(
         return userRepository.getName().asLiveData()
     }
 
+    fun imageResult(): LiveData<String> {
+        return userRepository.getImage().asLiveData()
+    }
+
     fun popularResult() {
         loadingState.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {

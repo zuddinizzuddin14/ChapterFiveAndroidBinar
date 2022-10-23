@@ -12,6 +12,8 @@ interface UserRepository {
 
     suspend fun setName(name: String)
 
+    suspend fun setImage(name: String)
+
     fun getSession(): Flow<Boolean>
 
     fun getUsername(): Flow<String>
@@ -19,5 +21,7 @@ interface UserRepository {
     fun getPassword(): Flow<String>
 
     fun getName(): Flow<String>
+
+    fun getImage(): Flow<String>
 
 }
