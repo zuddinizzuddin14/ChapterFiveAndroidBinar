@@ -17,11 +17,11 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        Properties properties = new Properties ()
-        properties.load(project.rootProject.file("local.properties").newDataInputStream())
-        buildConfigField "String", "API_KEY", "\"${properties.getProperty("API_KEY")}\""
-        buildConfigField "String", "BASE_URL", "\"${properties.getProperty("BASE_URL")}\""
+//
+//        Properties properties = new Properties ()
+//        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+//        buildConfigField "String", "API_KEY", "\"${properties.getProperty("API_KEY")}\""
+//        buildConfigField "String", "BASE_URL", "\"${properties.getProperty("BASE_URL")}\""
     }
 
     buildTypes {
@@ -40,6 +40,19 @@ android {
 
     buildFeatures {
         viewBinding = true
+    }
+
+    def keyPropertiesFile = rootProject.file("key.properties")
+    def keyProperties = new Properties()
+    keyProperties.load(new FileInputStream(keyPropertiesFile))
+
+    flavorDimensions 'default'
+    productFlavors {
+        production {
+            dimension = 'default'
+            buildConfigField("String", "BASE_URL", "\"${keyProperties.getProperty("BASE_URL")}\"")
+            buildConfigField("String", "API_KEY", "\"${keyProperties.getProperty("API_KEY")}\"")
+        }
     }
 
 }
