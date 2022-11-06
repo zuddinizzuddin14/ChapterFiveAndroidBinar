@@ -20,44 +20,34 @@
         android:theme="@style/Theme.MyMovieApp.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.ui.profileuser.editprofile.EditProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.ui.profileuser.subprofile.ChangePasswordActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.ui.registeruser.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.ui.loginuser.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.ui.profileuser.ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.ui.detailmovie.DetailMovieActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.ui.searchmovie.MovieSearchActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MyMovieApp" />
-        <activity
-            android:name=".presentation.ui.listmovie.MovieListActivity"
-            android:exported="true">
+            android:name=".presentation.ui.authuser.SplashActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".presentation.ui.listmovie.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.detailmovie.DetailMovieActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.profileuser.editprofile.EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.profileuser.subprofile.ChangePasswordActivity"
+            android:exported="false" />
         <provider
-            android:authorities="${applicationId}.provider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
     </application>
 

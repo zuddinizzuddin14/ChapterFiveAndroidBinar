@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">My Movies</string>
-    <string name="text_search">Search</string>
+    <string name="text_search">Search Movie</string>
     <string name="text_empty">Item is Empty</string>
     <string name="text_title_movie">Title Movie</string>
     <string name="text_description_movie">Description Movie</string>
@@ -14,6 +14,7 @@
     <string name="text_great_movies">Great Movies</string>
     <string name="text_now_playing">Now Playing</string>
     <string name="text_popular">Popular</string>
+    <string name="text_trending">Trending This Week</string>
     <string name="text_up_coming">Up Coming</string>
     <string name="text_top_rated">Top Rated</string>
     <string name="text_similar">Similar Movies</string>
@@ -22,12 +23,15 @@
     <string name="text_login">Login</string>
     <string name="text_username">Username</string>
     <string name="text_password">Password</string>
+    <string name="text_phone_number">Phone Number</string>
     <string name="text_dont_have_account">Dont Have Account? Click Here</string>
     <string name="text_name">Full Name</string>
     <string name="text_email">Email Address</string>
     <string name="text_register">Register</string>
     <string name="error_text_login_not_correct">Username and Password is not Correct</string>
     <string name="error_text_empty_username">Username is Empty</string>
+    <string name="error_text_empty_email">Email is Empty</string>
+    <string name="error_text_length_password">Password Length Must be Longer than 6 Digit</string>
     <string name="error_text_empty_password">Password is Empty</string>
     <string name="error_text_empty_confirm_password">Confirm Password is Empty</string>
     <string name="error_text_empty_name">Full Name is Empty</string>
@@ -49,6 +53,11 @@
     <string name="error_text_password_not_correct">Password is not Correct</string>
     <string name="text_blur_image">Blur Image</string>
     <string name="text_see_file">Go to File</string>
+    <string name="text_or">Or</string>
+    <string name="text_login_google">Login With Google</string>
+    <string name="text_empty_state">Item is Empty</string>
+    <string name="text_date">Release Date</string>
+    <string name="text_genre">Movie Genre</string>
 
 
 </resources>

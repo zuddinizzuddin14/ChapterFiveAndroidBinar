@@ -14,11 +14,13 @@
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/drawable/ic_star.xml" value="0.2835" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/drawable/ic_time.xml" value="0.2735" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/drawable/ic_time_outline.xml" value="0.2835" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/drawable/shape_light_grey_full_rounded.xml" value="0.2595" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/drawable/shape_light_grey_rounded.xml" value="0.275" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/drawable/shape_round_light_grey.xml" value="0.2835" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/drawable/sl_favorite.xml" value="0.3665" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_change_password.xml" value="0.35260416666666666" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_detail.xml" value="0.25416666666666665" />
-        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_detail_movie.xml" value="0.33" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_detail_movie.xml" value="0.5" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_detail_movie2.xml" value="0.36666666666666664" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_edit_profile.xml" value="0.33" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_home_page.xml" value="0.36666666666666664" />
@@ -28,20 +30,29 @@
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_movie_search.xml" value="0.36666666666666664" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_profile.xml" value="0.33" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_register.xml" value="0.35260416666666666" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/activity_splash.xml" value="0.36666666666666664" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/child_rv_layout.xml" value="0.42397914856646396" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/detail_movie.xml" value="0.264" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/fragment_login.xml" value="0.35260416666666666" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/fragment_movie_favorite.xml" value="0.36666666666666664" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/fragment_movie_list.xml" value="0.25" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/fragment_movie_search.xml" value="0.5" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/fragment_profile_user.xml" value="0.5" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/fragment_register.xml" value="0.35260416666666666" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/fragment_splash.xml" value="0.36666666666666664" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/item_first_movie.xml" value="0.36666666666666664" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/item_group_movie.xml" value="0.33" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/item_movie.xml" value="0.5029239766081871" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/item_movie_first.xml" value="0.36666666666666664" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/item_movies.xml" value="0.365625" />
-        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/item_popular.xml" value="0.22826086956521738" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/item_popular.xml" value="0.33" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/item_row_child.xml" value="0.4" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/item_row_layout.xml" value="0.4" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/item_rv.xml" value="0.36666666666666664" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/item_search.xml" value="0.33" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/item_trending.xml" value="0.5" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/layout/parent_rv_layout.xml" value="0.253125" />
+        <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/menu/bottom_menu.xml" value="0.365625" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/menu/main_menu.xml" value="0.33" />
         <entry key="..\:/Develop/Mobile/Android/MyMovieApp/app/src/main/res/menu/search_menu.xml" value="0.36666666666666664" />

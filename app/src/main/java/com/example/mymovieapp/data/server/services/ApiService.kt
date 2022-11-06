@@ -1,11 +1,17 @@
 package com.example.mymovieapp.data.server.services
 
+import com.example.mymovieapp.data.server.response.DetailMovieResponse
 import com.example.mymovieapp.data.server.response.MovieResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
+
+    @GET("trending/movie/{time_window}")
+    suspend fun trendingMovies(
+        @Path("time_window") timeWindow: String = "week",
+    ): MovieResponse
 
     @GET("movie/popular")
     suspend fun popularMovies(
@@ -37,5 +43,10 @@ interface ApiService {
     suspend fun searchMovie(
         @Query("query", encoded = true) query: String,
     ): MovieResponse
+
+    @GET("movie/{movie_id}")
+    suspend fun detailMovie(
+        @Path("movie_id") movieId: Int,
+    ): DetailMovieResponse
 
 }

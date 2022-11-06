@@ -1,14 +1,13 @@
 package com.example.mymovieapp.di
 
-import android.content.Context
-import com.example.mymovieapp.data.local.datastore.UserDataStore
+import com.example.mymovieapp.data.repositories.FirebaseAuthRepository
 import com.example.mymovieapp.data.repositories.MovieRepository
-import com.example.mymovieapp.data.repositories.UserRepository
+import com.example.mymovieapp.data.server.firebase.FirebaseAuthRepositoryImpl
 import com.example.mymovieapp.data.server.services.ApiHelper
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -24,8 +23,11 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideUserRepository(
-        @ApplicationContext context : Context
-    ): UserRepository = UserDataStore(context)
+    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
+    @Singleton
+    @Provides
+    fun provideFirebaseAuthRepository(
+        firebaseAuthRepositoryImpl: FirebaseAuthRepositoryImpl
+    ): FirebaseAuthRepository = firebaseAuthRepositoryImpl
 }

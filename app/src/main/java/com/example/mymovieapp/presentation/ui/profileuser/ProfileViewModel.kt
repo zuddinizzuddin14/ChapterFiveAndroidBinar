@@ -1,32 +1,21 @@
 package com.example.mymovieapp.presentation.ui.profileuser
 
-import androidx.lifecycle.*
-import com.example.mymovieapp.data.repositories.UserRepository
+import androidx.lifecycle.ViewModel
+import com.example.mymovieapp.data.repositories.FirebaseAuthRepository
+import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val repository: UserRepository
+    private val repository: FirebaseAuthRepository
     ): ViewModel() {
 
-//    val userResult = MutableLiveData<Resource<UserEntity?>>()
-//    val changePasswordResult = MutableLiveData<Resource<Number>>()
-//    val loadingState = MutableLiveData<Boolean>()
+    val currentUser: FirebaseUser?
+        get() = repository.currentUser
 
-    fun nameResult(): LiveData<String> {
-        return repository.getName().asLiveData()
-    }
-
-    fun imageResult(): LiveData<String> {
-        return repository.getImage().asLiveData()
-    }
-
-    fun sessionDestroy() {
-        viewModelScope.launch {
-            repository.setSession(false)
-        }
+    fun logout() {
+        repository.logout()
     }
 
 }

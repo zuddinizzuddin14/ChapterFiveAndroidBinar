@@ -1,5 +1,6 @@
 package com.example.mymovieapp.data.repositories
 
+import com.example.mymovieapp.data.server.response.DetailMovieResponse
 import com.example.mymovieapp.data.server.response.MovieResponse
 import com.example.mymovieapp.data.server.services.ApiHelper
 import com.example.mymovieapp.wrapper.Resource
@@ -7,37 +8,31 @@ import com.example.mymovieapp.wrapper.Resource
 class MovieRepository(
     private val apiHelper: ApiHelper
 ) {
-   suspend fun searchMovie(query: String): Resource<MovieResponse> {
+    suspend fun getListMovie(): Resource<List<MovieResponse>> {
+        return proceed {
+            buildList(5) {
+                add(apiHelper.trendingMovies())
+                add(apiHelper.popularMovies())
+                add(apiHelper.nowPlayingMovies())
+                add(apiHelper.topRatedMovies())
+                add(apiHelper.upComingMovies())
+            }
+        }
+    }
+
+    suspend fun getDetailMovies(movieId: Int): Resource<DetailMovieResponse> {
+        return proceed {
+            apiHelper.detailMovie(movieId)
+        }
+    }
+
+    suspend fun searchMovie(query: String): Resource<MovieResponse> {
         return proceed {
             apiHelper.searchMovie(query)
         }
     }
 
-   suspend fun getPopularMovies(): Resource<MovieResponse> {
-        return proceed {
-            apiHelper.popularMovies()
-        }
-    }
-
-   suspend fun getTopRatedMovies(): Resource<MovieResponse> {
-        return proceed {
-            apiHelper.topRatedMovies()
-        }
-    }
-
-   suspend fun getUpComingMovies(): Resource<MovieResponse> {
-        return proceed {
-            apiHelper.upComingMovies()
-        }
-    }
-
-   suspend fun getNowPlayingMovies(): Resource<MovieResponse> {
-        return proceed {
-            apiHelper.nowPlayingMovies()
-        }
-    }
-
-   suspend fun getSimilarMovies(movieId: Int): Resource<MovieResponse> {
+    suspend fun getSimilarMovies(movieId: Int): Resource<MovieResponse> {
         return proceed {
             apiHelper.similarMovies(movieId)
         }

@@ -25,36 +25,16 @@ class ChangePasswordActivity : AppCompatActivity() {
 
     private fun changePassword() {
         if (validateForm()) {
-            val password = binding.etPassword.text.toString().trim()
             val newPassword = binding.etNewPassword.text.toString().trim()
-            var isPasswordCorrect = false
-
-            viewModel.getPassword().observe(this@ChangePasswordActivity) {
-                if (password == it) isPasswordCorrect = true
-            }
-
-            if(isPasswordCorrect){
-                viewModel.changePassword(newPassword)
-                Toast.makeText(this@ChangePasswordActivity, getString(R.string.success_change_password), Toast.LENGTH_SHORT).show()
-                onBackPressed()
-            } else {
-                Toast.makeText(this@ChangePasswordActivity, getString(R.string.error_text_password_not_correct), Toast.LENGTH_SHORT).show()
-            }
+            viewModel.changePassword(newPassword)
+            Toast.makeText(this@ChangePasswordActivity, getString(R.string.success_change_password), Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun validateForm(): Boolean {
-        val password = binding.etPassword.text.toString()
         val newPassword = binding.etNewPassword.text.toString()
         val confirmNewPassword = binding.etConfirmNewPassword.text.toString()
         var isFormValid = true
-        if (password.isEmpty()) {
-            isFormValid = false
-            binding.tilPassword.isErrorEnabled = true
-            binding.tilPassword.error = getString(R.string.error_text_empty_confirm_password)
-        } else {
-            binding.tilPassword.isErrorEnabled = false
-        }
         if (newPassword.isEmpty()) {
             isFormValid = false
             binding.tilNewPassword.isErrorEnabled = true
@@ -85,7 +65,10 @@ class ChangePasswordActivity : AppCompatActivity() {
             changePassword()
         }
         binding.btnCancel.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
+        }
+        binding.ivBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 

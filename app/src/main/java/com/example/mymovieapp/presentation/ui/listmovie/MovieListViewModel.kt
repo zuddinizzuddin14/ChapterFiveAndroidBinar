@@ -1,8 +1,9 @@
 package com.example.mymovieapp.presentation.ui.listmovie
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.mymovieapp.data.repositories.MovieRepository
-import com.example.mymovieapp.data.repositories.UserRepository
 import com.example.mymovieapp.data.server.response.MovieResponse
 import com.example.mymovieapp.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,97 +13,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieListViewModel @Inject constructor(
-    private val movieRepository: MovieRepository,
-    private val userRepository: UserRepository
-    ): ViewModel() {
+    private val movieRepository: MovieRepository
+): ViewModel() {
 
-    val popularResult = MutableLiveData<Resource<MovieResponse>>()
-    val topRatedResult = MutableLiveData<Resource<MovieResponse>>()
-    val upComingResult = MutableLiveData<Resource<MovieResponse>>()
-    val nowPlayingResult = MutableLiveData<Resource<MovieResponse>>()
+    val movieResult = MutableLiveData<Resource<List<MovieResponse>>>()
     val loadingState = MutableLiveData<Boolean>()
     val errorState = MutableLiveData<Pair<Boolean, Exception?>>()
 
-    fun getSession(): LiveData<Boolean> {
-        return userRepository.getSession().asLiveData()
-    }
-
-    fun nameResult(): LiveData<String> {
-        return userRepository.getName().asLiveData()
-    }
-
-    fun imageResult(): LiveData<String> {
-        return userRepository.getImage().asLiveData()
-    }
-
-    fun popularResult() {
+    fun movieResult() {
         loadingState.postValue(true)
         viewModelScope.launch(Dispatchers.IO) {
             errorState.postValue(Pair(false, null))
             try {
-                val data = movieRepository.getPopularMovies()
+                val data = movieRepository.getListMovie()
                 viewModelScope.launch(Dispatchers.Main) {
-                    popularResult.postValue(data)
-                    loadingState.postValue(false)
-                    errorState.postValue(Pair(false, null))
-                }
-            } catch (e: Exception) {
-                viewModelScope.launch(Dispatchers.Main) {
-                    loadingState.postValue(false)
-                    errorState.postValue(Pair(true, e))
-                }
-            }
-        }
-    }
-
-    fun topRatedResult() {
-        loadingState.postValue(true)
-        viewModelScope.launch(Dispatchers.IO) {
-            errorState.postValue(Pair(false, null))
-            try {
-                val data = movieRepository.getTopRatedMovies()
-                viewModelScope.launch(Dispatchers.Main) {
-                    topRatedResult.postValue(data)
-                    loadingState.postValue(false)
-                    errorState.postValue(Pair(false, null))
-                }
-            } catch (e: Exception) {
-                viewModelScope.launch(Dispatchers.Main) {
-                    loadingState.postValue(false)
-                    errorState.postValue(Pair(true, e))
-                }
-            }
-        }
-    }
-
-    fun nowPlayingResult() {
-        loadingState.postValue(true)
-        viewModelScope.launch(Dispatchers.IO) {
-            errorState.postValue(Pair(false, null))
-            try {
-                val data = movieRepository.getNowPlayingMovies()
-                viewModelScope.launch(Dispatchers.Main) {
-                    nowPlayingResult.postValue(data)
-                    loadingState.postValue(false)
-                    errorState.postValue(Pair(false, null))
-                }
-            } catch (e: Exception) {
-                viewModelScope.launch(Dispatchers.Main) {
-                    loadingState.postValue(false)
-                    errorState.postValue(Pair(true, e))
-                }
-            }
-        }
-    }
-
-    fun upComingResult() {
-        loadingState.postValue(true)
-        viewModelScope.launch(Dispatchers.IO) {
-            errorState.postValue(Pair(false, null))
-            try {
-                val data = movieRepository.getUpComingMovies()
-                viewModelScope.launch(Dispatchers.Main) {
-                    upComingResult.postValue(data)
+                    movieResult.postValue(data)
                     loadingState.postValue(false)
                     errorState.postValue(Pair(false, null))
                 }

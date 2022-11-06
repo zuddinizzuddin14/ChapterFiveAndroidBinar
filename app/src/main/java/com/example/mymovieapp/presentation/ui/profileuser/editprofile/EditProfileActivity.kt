@@ -5,11 +5,14 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
+import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -38,18 +41,24 @@ class EditProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        obServeData()
         setClickListeners()
     }
 
+    override fun onResume() {
+        super.onResume()
+        obServeData()
+    }
+
     private fun obServeData() {
-        viewModel.getName().observe(this) {
-            binding.etName.setText(it.toString())
-        }
-        viewModel.getImage().observe(this) {
-            if (!it.equals("null")) {
-                binding.ivProfile.load(imageUtil.stringToBitMap(it)) {
+        val user = viewModel.currentUser
+        if (user != null) {
+            if (user.displayName.isNullOrEmpty().not()) {
+                binding.etName.setText(user.displayName)
+            }
+            if (user.photoUrl.toString() != "null") {
+                binding.ivProfile.load(user.photoUrl) {
                     transformations(CircleCropTransformation())
+                    placeholder(R.drawable.ic_account)
                 }
             }
         }
@@ -60,37 +69,39 @@ class EditProfileActivity : AppCompatActivity() {
             changeName()
         }
         binding.btnCancel.setOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
+        }
+        binding.ivBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
         binding.ivProfile.setOnClickListener {
             checkingPermissions()
         }
-        binding.btnBlur.setOnClickListener {
-            var image: String? = null
-            viewModel.getImage().observe(this) {
-                if (!it.equals("null")) {
-                    image = it
-                }
-            }
-
-            viewModel.blurImage(this@EditProfileActivity)
-            val bitmap = imageUtil.stringToBitMap(image.toString())
-            val blurImage = imageUtil.applyBlur(this@EditProfileActivity, bitmap)
-            viewModel.saveImage(imageUtil.bitmapToString(blurImage))
-        }
+//        binding.btnBlur.setOnClickListener {
+//            var image: String? = null
+//            viewModel.getImage().observe(this) {
+//                if (!it.equals("null")) {
+//                    image = it
+//                }
+//            }
+//
+//            viewModel.blurImage(this@EditProfileActivity)
+//            val bitmap = imageUtil.stringToBitMap(image.toString())
+//            val blurImage = imageUtil.applyBlur(this@EditProfileActivity, bitmap)
+//            viewModel.saveImage(imageUtil.bitmapToString(blurImage))
+//        }
     }
 
     private fun changeName() {
-        if (validateForm()) {
-            val name = binding.etName.text.toString().trim()
+        val name = binding.etName.text.toString().trim()
+        if (validateForm(name)) {
             Toast.makeText(this@EditProfileActivity, getString(R.string.success_change_name), Toast.LENGTH_SHORT).show()
             viewModel.changeName(name)
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
-    private fun validateForm(): Boolean {
-        val name = binding.etName.text.toString()
+    private fun validateForm(name: String): Boolean {
         var isFormValid = true
         if (name.isEmpty()) {
             isFormValid = false
@@ -98,6 +109,7 @@ class EditProfileActivity : AppCompatActivity() {
             binding.tilName.error = getString(R.string.error_text_empty_name)
         } else {
             binding.tilName.isErrorEnabled = false
+            binding.ivProfile.buildDrawingCache()
         }
         return isFormValid
     }
@@ -164,16 +176,30 @@ class EditProfileActivity : AppCompatActivity() {
     private val cameraResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                handleCameraImage(result.data)
+//                handleCameraImage(result.data)
+                val bitmap = result.data?.extras?.get("data") as Bitmap
+                binding.ivProfile.load(bitmap) {
+                    transformations(CircleCropTransformation())
+                }
+                viewModel.saveImage(bitmap)
             }
         }
 
-    private fun handleCameraImage(intent: Intent?) {
-        val bitmap = intent?.extras?.get("data") as Bitmap
-        binding.ivProfile.load(bitmap) {
-            transformations(CircleCropTransformation())
-        }
-        viewModel.saveImage(imageUtil.bitmapToString(bitmap))
+//    private fun handleCameraImage(intent: Intent?) {
+//        val bitmap = intent?.extras?.get("data") as Bitmap
+//        binding.ivProfile.load(bitmap) {
+//            transformations(CircleCropTransformation())
+//        }
+//        viewModel.saveImage(bitmap)
+//    }
+
+    fun getBitmapFromView(view: View): Bitmap {
+        val bitmap = Bitmap.createBitmap(
+            view.width, view.height, Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
     }
 
     private fun showPermissionDeniedDialog() {
